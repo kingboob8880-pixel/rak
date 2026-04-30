@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
+    <title>Лекарь Абу Мухаммад | Духовное исцеление от рака</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+        }
+
+        /* Базовые переменные (светлая тема по умолчанию) */
+        :root {
+            --bg-body: #f8f9fa;
+            --bg-card: #ffffff;
+            --text-primary: #1e2a3a;
+            --text-secondary: #2c3e50;
+            --accent: #2c7a47;
+            --accent-soft: #e9f5eb;
+            --border: #dee2e6;
+            --header-bg: #ffffffcc;
+            --header-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            --btn-bg: #f1f3f5;
+            --btn-hover: #e9ecef;
+            --btn-text: #1e2a3a;
+            --toggle-icon: invert(0);
+        }
+
+        body.dark {
+            --bg-body: #121212;
+            --bg-card: #1e2a2f;
+            --text-primary: #e2e8f0;
+            --text-secondary: #cbd5e1;
+            --accent: #6fbf4c;
+            --accent-soft: #2a3a2c;
+            --border: #334155;
+            --header-bg: #1e2a2fe6;
+            --header-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            --btn-bg: #2d3a3f;
+            --btn-hover: #3a4a50;
+            --btn-text: #e2e8f0;
+            --toggle-icon: invert(1);
+        }
+
+        body {
+            background-color: var(--bg-body);
+            color: var(--text-primary);
+            font-family: system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Cairo', sans-serif;
+            line-height: 1.5;
+            padding-top: 80px;
+            padding-bottom: 3rem;
+        }
+
+        /* Стики панель управления */
+        .controls-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--header-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: var(--header-shadow);
+        }
+
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent), #3ba86a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.3px;
+        }
+
+        .controls-group {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background: var(--btn-bg);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            color: var(--btn-text);
+            transition: all 0.2s;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-icon {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: var(--btn-hover);
+            transform: scale(0.96);
+        }
+
+        .theme-toggle {
+            background: var(--btn-bg);
+            border-radius: 40px;
+            width: auto;
+        }
+
+        /* контейнер с рукъя */
+        .ruqya-container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        .ruqya-card {
+            background: var(--bg-card);
+            border-radius: 28px;
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border: 1px solid var(--border);
+            transition: transform 0.1s;
+        }
+
+        .arabic {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            text-align: right;
+            direction: rtl;
+            font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade New', 'Noto Naskh Arabic', serif;
+            font-weight: 500;
+            background: var(--accent-soft);
+            padding: 1rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            color: #0f2a1f;
+        }
+        body.dark .arabic {
+            color: #d9f0df;
+            background: #2a3a2c;
+        }
+
+        .translation, .transcription {
+            margin-top: 0.75rem;
+            padding-left: 0.3rem;
+            border-left: 4px solid var(--accent);
+            padding-right: 0.2rem;
+        }
+
+        .translation strong, .transcription strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .translation {
+            font-size: 1rem;
+        }
+
+        .transcription {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-family: 'Courier New', 'Consolas', monospace;
+        }
+
+        hr {
+            margin: 1rem 0;
+            border-color: var(--border);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            opacity: 0.7;
+        }
+
+        /* адаптив */
+        @media (max-width: 550px) {
+            .controls-bar {
+                flex-direction: column;
+                align-items: stretch;
+                text-align: center;
+                gap: 8px;
+                padding: 0.6rem;
+            }
+            .controls-group {
+                justify-content: center;
+            }
+            body {
+                padding-top: 110px;
+            }
+            .arabic {
+                font-size: 1.25rem;
+            }
+            .ruqya-card {
+                padding: 1rem;
+            }
+        }
+
+        /* увеличение/уменьшение текста через класс на body */
+        body.font-sm {
+            font-size: 13px;
+        }
+        body.font-md {
+            font-size: 16px;
+        }
+        body.font-lg {
+            font-size: 18px;
+        }
+        body.font-xl {
+            font-size: 21px;
+        }
+        body.font-xxl {
+            font-size: 24px;
+        }
+        /* относительные единицы у карточек */
+        .ruqya-card, .arabic, .translation, .transcription {
+            transition: font-size 0.05s linear;
+        }
+        .arabic {
+            font-size: 1.4em;
+        }
+        .translation {
+            font-size: 1em;
+        }
+        .transcription {
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls-bar">
+        <div class="logo">🌿 Лекарь Абу Мухаммад</div>
+        <div class="controls-group">
+            <button id="themeToggleBtn" class="btn theme-toggle" aria-label="Тёмная/светлая тема">🌙 Тёмная тема</button>
+            <div class="controls-group">
+                <button id="fontMinusBtn" class="btn" aria-label="Уменьшить шрифт">🔍⁻</button>
+                <button id="fontPlusBtn" class="btn" aria-label="Увеличить шрифт">🔍⁺</button>
+                <button id="fontResetBtn" class="btn" aria-label="Сбросить размер">⟳</button>
+            </div>
+        </div>
+    </div>
+
+    <main class="ruqya-container">
+        <h1 style="margin-bottom: 1rem; font-size: 1.6rem;">🕯️ Рукъя от рака (саратан) — духовное исцеление</h1>
+        <p style="margin-bottom: 1.6rem; color: var(--text-secondary);">По методу «Бисмиллях аркий ...» — защита от болезни, порчи и сглаза, которые проявляются как рак. Читайте с верой, дуйте на воду, масло или себя.</p>
+
+        <!-- 10 заклинаний -->
+        <div class="ruqya-card" id="ruqya1">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنَ السَّرَطَانِ كَمَرَضٍ فِي جَسَدِي</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от рака как болезни в моём теле.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-с-саратани камарадин фи джасади.</div>
+        </div>
+        <div class="ruqya-card" id="ruqya2">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنَ السَّرَطَانِ الَّذِي أَصَابَ الْعُضْوَ وَالْأَنْسِجَةَ فِي صِحَّتِي</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от рака, поразившего орган и ткани, в моём здоровье.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-с-саратани аллязи асаба-ль-‘удва ва-ль-ансиджата фи сиххати.</div>
+        </div>
+        <div class="ruqya-card" id="ruqya3">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنَ الْوَرَمِ السَّرَطَانِيِّ وَنُمُوِّهِ فِي بَدَنِي</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от раковой опухоли и её роста в моём теле.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-ль-варами-с-саратанийи ва нумуввихи фи бадани.</div>
+        </div>
+        <div class="ruqya-card" id="ruqya4">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنَ السِّحْرِ الَّذِي يُسَبِّبُ السَّرَطَانَ فِي أَعْضَائِي</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от порчи, которая вызывает рак, в моих органах.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-с-сихри аллязи юсаббибу-с-саратана фи а‘даи.</div>
+        </div>
+        <div class="ruqya-card" id="ruqya5">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنْ سِحْرِ السَّرَطَانِ الَّذِي يَنْشَبُّ فِي اللَّحْمِ وَالدَّمِ</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от порчи-рака, которая проникает в плоть и кровь.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мин сихри-с-саратани аллязи яншаббу фи-ль-ляхми ва-д-дами.</div>
+        </div>
+        <div class="ruqya-card" id="ruqya6">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنَ الْعَيْنِ الَّتِي تُحْدِثُ السَّرَطَانَ فِي خَلَايَايَ</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от сглаза, который вызывает рак, в моих клетках.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-ль-‘айни алляти тухдису-с-саратана фи халяйай.</div>
+        </div>
+        <div class="ruqya-card" id="ruqya7">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنَ الْعَيْنِ الَّتِي تُقَوِّي السَّرَطَانَ وَتُفَرِّقُهُ فِي دَمِي</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от сглаза, который усиливает рак и распространяет его, в моей крови.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-ль-‘айни алляти тукавви-с-саратана ва туфаррикуху фи дами.</div>
+        </div>
+        <div class="ruqya-card" id="ruqya8">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنِ انْتِشَارِ السَّرَطَانِ فِي جَسَدِي وَأَعْضَائِي</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от распространения рака в моём теле и органах.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи минтишари-с-саратани фи джасади ва а‘даи.</div>
+        </div>
+        <div class="ruqya-card" id="ruqya9">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنَ الضَّعْفِ وَالْقَمْعِ الَّذِي يُمَكِّنُ السَّرَطَانَ فِي مَنَاعَتِي</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от слабости и подавления, которые дают раку силу, в моём иммунитете.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-д-да‘фи ва-ль-къам‘и аллязи юмаккину-с-саратана фи мана‘ати.</div>
+        </div>
+        <div class="ruqya-card" id="ruqya10">
+            <div class="arabic">بِسْمِ اللَّهِ أَرْقِي مِنْ أَصْلِ السَّرَطَانِ وَجَذْرِهِ فِي شِفَائِي</div>
+            <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от корня и основы рака в моём исцелении.</div>
+            <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мин асли-с-саратани ва джазрихи фи шифаи.</div>
+        </div>
+
+        <footer>Духовное лечение — дополнение к доверии Всевышнему. Читайте с убеждённостью, дуйте на себя и на воду.<br>Лекарь Абу Мухаммад ✦ Исцеление именем Аллаха</footer>
+    </main>
+
+    <script>
+        (function() {
+            // --- Управление размером текста (масштабирование базового размера body)
+            // Используем классы font-*, чтобы менять базовый размер шрифта для всего контента
+            const body = document.body;
+            let currentFontLevel = 2;  // 0:sm, 1:md, 2:lg, 3:xl, 4:xxl -> по умолчанию lg (18px)
+            const fontClasses = ['font-sm', 'font-md', 'font-lg', 'font-xl', 'font-xxl'];
+            const baseSizes = [13, 16, 18, 21, 24];
+            
+            function applyFontLevel(level) {
+                // удаляем предыдущие классы шрифтов
+                for (let cls of fontClasses) {
+                    body.classList.remove(cls);
+                }
+                body.classList.add(fontClasses[level]);
+                currentFontLevel = level;
+                localStorage.setItem('ruqya_font_level', level);
+            }
+            
+            function increaseFont() {
+                if (currentFontLevel < fontClasses.length - 1) {
+                    applyFontLevel(currentFontLevel + 1);
+                }
+            }
+            function decreaseFont() {
+                if (currentFontLevel > 0) {
+                    applyFontLevel(currentFontLevel - 1);
+                }
+            }
+            function resetFont() {
+                applyFontLevel(2); // стандарт lg (18px)
+            }
+            
+            // --- Тема (светлая / тёмная)
+            const themeBtn = document.getElementById('themeToggleBtn');
+            let isDark = localStorage.getItem('ruqya_theme') === 'dark';
+            
+            function applyTheme(dark) {
+                if (dark) {
+                    body.classList.add('dark');
+                    themeBtn.innerHTML = '☀️ Светлая тема';
+                    localStorage.setItem('ruqya_theme', 'dark');
+                } else {
+                    body.classList.remove('dark');
+                    themeBtn.innerHTML = '🌙 Тёмная тема';
+                    localStorage.setItem('ruqya_theme', 'light');
+                }
+                isDark = dark;
+            }
+            
+            function toggleTheme() {
+                applyTheme(!isDark);
+            }
+            
+            // --- инициализация сохранённых настроек
+            const savedFont = localStorage.getItem('ruqya_font_level');
+            if (savedFont !== null && !isNaN(parseInt(savedFont))) {
+                let level = parseInt(savedFont);
+                if (level >= 0 && level < fontClasses.length) {
+                    applyFontLevel(level);
+                } else {
+                    applyFontLevel(2);
+                }
+            } else {
+                applyFontLevel(2);   // lg 18px хорош для мобил
+            }
+            
+            // тема
+            if (localStorage.getItem('ruqya_theme') === 'dark') {
+                applyTheme(true);
+            } else {
+                applyTheme(false);
+            }
+            
+            // --- привязываем кнопки
+            document.getElementById('fontPlusBtn').addEventListener('click', increaseFont);
+            document.getElementById('fontMinusBtn').addEventListener('click', decreaseFont);
+            document.getElementById('fontResetBtn').addEventListener('click', resetFont);
+            themeBtn.addEventListener('click', toggleTheme);
+            
+            // Доп. чтобы панель не мешала действиям на мобильных (кнопки крупные)
+            // При клике на кнопках нет перезагрузки страницы
+        })();
+    </script>
+    <!-- Арабский шрифт с поддержкой харакатов -->
+</body>
+</html>
