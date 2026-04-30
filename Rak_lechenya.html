@@ -12,7 +12,7 @@
             -webkit-tap-highlight-color: transparent;
         }
 
-        /* Переменные светлой темы (по умолчанию) */
+        /* Светлая тема (по умолчанию) */
         :root {
             --bg-body: #f9f7f3;
             --bg-card: #ffffff;
@@ -45,13 +45,13 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-primary);
-            font-family: system-ui, 'Segoe UI', 'Roboto', 'Noto Sans', 'Amiri', 'Traditional Arabic', sans-serif;
+            font-family: system-ui, 'Segoe UI', 'Roboto', 'Noto Sans', 'Amiri', sans-serif;
             transition: background-color 0.25s ease, color 0.2s ease;
             line-height: 1.5;
             padding-bottom: 2rem;
         }
 
-        /* Стики-панель управления */
+        /* Панель управления (прилипает при скролле) */
         .control-bar {
             position: sticky;
             top: 0;
@@ -72,12 +72,10 @@
         .logo h1 {
             font-size: 1.45rem;
             font-weight: 700;
-            letter-spacing: -0.3px;
             background: linear-gradient(135deg, var(--accent), #b5875a);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            text-shadow: none;
         }
 
         .logo p {
@@ -106,7 +104,6 @@
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
         .tool-btn:active {
@@ -117,11 +114,6 @@
             background: var(--btn-hover);
         }
 
-        .icon {
-            font-size: 1.2rem;
-        }
-
-        /* карточки рукъя */
         .container {
             max-width: 720px;
             margin: 1.2rem auto;
@@ -134,7 +126,6 @@
             padding: 1.2rem 1.2rem 1.5rem 1.2rem;
             margin-bottom: 1.5rem;
             border: 1px solid var(--border-card);
-            transition: transform 0.1s ease, background 0.2s;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.02);
         }
 
@@ -168,19 +159,10 @@
             margin-right: 0.5rem;
         }
 
-        .translation {
-            font-size: 1rem;
-        }
-
         .transcription {
             font-size: 0.95rem;
             color: var(--text-secondary);
             font-family: monospace;
-        }
-
-        hr {
-            margin: 1rem 0;
-            border-color: var(--border-card);
         }
 
         .footer-note {
@@ -190,10 +172,8 @@
             margin-top: 2rem;
             border-top: 1px solid var(--border-card);
             padding-top: 1.5rem;
-            color: var(--text-secondary);
         }
 
-        /* адаптив */
         @media (max-width: 560px) {
             .control-bar {
                 flex-direction: column;
@@ -207,10 +187,6 @@
                 font-size: 1.45rem;
             }
         }
-
-        button {
-            font-family: inherit;
-        }
     </style>
 </head>
 <body>
@@ -221,86 +197,82 @@
         <p>духовное врачевание · рукъя от недугов</p>
     </div>
     <div class="toolbar">
-        <button class="tool-btn" id="decreaseFont" aria-label="Уменьшить текст">🔍<span class="icon">A−</span></button>
-        <button class="tool-btn" id="increaseFont" aria-label="Увеличить текст">🔍<span class="icon">A+</span></button>
-        <button class="tool-btn" id="themeToggle" aria-label="Сменить тему">🌙/☀️</button>
+        <button class="tool-btn" id="decreaseFont">📉 A−</button>
+        <button class="tool-btn" id="increaseFont">📈 A+</button>
+        <button class="tool-btn" id="themeToggle">🌓 Тема</button>
     </div>
 </div>
 
 <div class="container">
-    <!-- Вступление: духовное лечение от рака, порчи-рака и сглаза-рака -->
     <div class="ruqya-card" style="background: var(--badge-bg); text-align: center;">
-        <p style="font-weight: 500;">✿ БисмиЛлях ✿</p>
-        <p style="margin-top: 0.5rem;">Рукъя от <strong>рака (саратан)</strong>, а также от порчи и сглаза, которые проявляются в виде этой болезни. Каждое заклинание читается с верой в Аллаха, сопровождается дуновением на больное место, воду или оливковое масло.</p>
-        <p style="margin-top: 0.7rem; font-size: 0.9rem;">🕯️ Лечение только духовное, по Сунне и с упованием на Всевышнего.</p>
+        <p style="font-weight: 500;">ﷺ БисмиЛлях ﷺ</p>
+        <p style="margin-top: 0.5rem;">Рукъя от <strong>рака (саратан)</strong>, а также от порчи и сглаза, которые проявляются в виде этой болезни. Каждое заклинание читается с верой в Аллаха.</p>
     </div>
 
-    <!-- ========== 10 заклинаний (по методу "Бисмиллях аркий...") ========== -->
-
-    <!-- 1. Рак как болезнь -->
+    <!-- 1 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنَ السَّرَطَانِ كَمَرَضٍ فِي جَسَدِي</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от рака как болезни в моём теле.</div>
         <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-с-саратани камарадин фи джасади.</div>
     </div>
 
-    <!-- 2. Рак, поразивший орган и ткани -->
+    <!-- 2 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنَ السَّرَطَانِ الَّذِي أَصَابَ الْعُضْوَ وَالْأَنْسِجَةَ فِي صِحَّتِي</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от рака, поразившего орган и ткани, в моём здоровье.</div>
         <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-с-саратани аллязи асаба-ль-‘удва ва-ль-ансиджата фи сиххати.</div>
     </div>
 
-    <!-- 3. Раковая опухоль и её рост -->
+    <!-- 3 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنَ الْوَرَمِ السَّرَطَانِيِّ وَنُمُوِّهِ فِي بَدَنِي</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от раковой опухоли и её роста в моём теле.</div>
         <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-ль-варами-с-саратанийи ва нумуввихи фи бадани.</div>
     </div>
 
-    <!-- 4. Порча, вызывающая рак -->
+    <!-- 4 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنَ السِّحْرِ الَّذِي يُسَبِّبُ السَّرَطَانَ فِي أَعْضَائِي</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от порчи, которая вызывает рак, в моих органах.</div>
         <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-с-сихри аллязи юсаббибу-с-саратана фи а‘даи.</div>
     </div>
 
-    <!-- 5. Порча-саратан (принимает форму рака) -->
+    <!-- 5 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنْ سِحْرِ السَّرَطَانِ الَّذِي يَنْشَبُّ فِي اللَّحْمِ وَالدَّمِ</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от порчи-рака, которая проникает в плоть и кровь.</div>
         <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мин сихри-с-саратани аллязи яншаббу фи-ль-ляхми ва-д-дами.</div>
     </div>
 
-    <!-- 6. Сглаз, вызывающий рак -->
+    <!-- 6 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنَ الْعَيْنِ الَّتِي تُحْدِثُ السَّرَطَانَ فِي خَلَايَايَ</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от сглаза, который вызывает рак, в моих клетках.</div>
         <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-ль-‘айни алляти тухдису-с-саратана фи халяйай.</div>
     </div>
 
-    <!-- 7. Сглаз, усиливающий и распространяющий рак -->
+    <!-- 7 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنَ الْعَيْنِ الَّتِي تُقَوِّي السَّرَطَانَ وَتُفَرِّقُهُ فِي دَمِي</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от сглаза, который усиливает рак и распространяет его, в моей крови.</div>
         <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-ль-‘айни алляти тукавви-с-саратана ва туфаррикуху фи дами.</div>
     </div>
 
-    <!-- 8. Распространение рака (метастаз) -->
+    <!-- 8 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنِ انْتِشَارِ السَّرَطَانِ فِي جَسَدِي وَأَعْضَائِي</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от распространения рака в моём теле и органах.</div>
         <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи минтишари-с-саратани фи джасади ва а‘даи.</div>
     </div>
 
-    <!-- 9. Слабость иммунитета перед раком -->
+    <!-- 9 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنَ الضَّعْفِ وَالْقَمْعِ الَّذِي يُمَكِّنُ السَّرَطَانَ فِي مَنَاعَتِي</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от слабости и подавления, которые дают раку силу, в моём иммунитете.</div>
         <div class="transcription"><strong>Транскрипция:</strong> Бисми-Ллахи аркъи мина-д-да‘фи ва-ль-къам‘и аллязи юмаккину-с-саратана фи мана‘ати.</div>
     </div>
 
-    <!-- 10. Корень и основа рака (полное искоренение) -->
+    <!-- 10 -->
     <div class="ruqya-card">
         <div class="arabic-text">بِسْمِ اللَّهِ أَرْقِي مِنْ أَصْلِ السَّرَطَانِ وَجَذْرِهِ فِي شِفَائِي</div>
         <div class="translation"><strong>Перевод:</strong> С именем Аллаха, я заклинаю от корня и основы рака в моём исцелении.</div>
@@ -308,55 +280,44 @@
     </div>
 
     <div class="footer-note">
-        ✦ Читайте каждую рукъю нечётное количество раз (3,5,7,11). Дуйте на грудь, воду, масло чёрного тмина или на больное место. <br>
-        ✦ Лекарь Абу Мухаммад напоминает: сила – от Аллаха, а эти дуа – милость для верующих.
+        ✦ Читайте каждую рукъю 3, 5, 7 или 11 раз. Дуйте на воду, масло или больное место.<br>
+        ✦ Лекарь Абу Мухаммад. Сила — от Аллаха.
     </div>
 </div>
 
 <script>
     (function() {
-        // ---------- Управление размером шрифта (корневой rem) ----------
         const root = document.documentElement;
-        let currentFontSize = 16;   // база в px
+        let currentFontSize = 16;
         const MIN_SIZE = 12;
-        const MAX_SIZE = 26;
+        const MAX_SIZE = 28;
 
-        function setRootFontSize(size) {
+        function setFontSize(size) {
             root.style.fontSize = size + 'px';
             currentFontSize = size;
-            // сохраним в localStorage
             localStorage.setItem('ruqya_font_size', size);
         }
 
-        function increaseFont() {
-            let newSize = currentFontSize + 1;
-            if (newSize > MAX_SIZE) newSize = MAX_SIZE;
-            setRootFontSize(newSize);
-        }
-
-        function decreaseFont() {
-            let newSize = currentFontSize - 1;
-            if (newSize < MIN_SIZE) newSize = MIN_SIZE;
-            setRootFontSize(newSize);
-        }
-
-        // Загрузка сохранённого размера шрифта
         const savedSize = localStorage.getItem('ruqya_font_size');
         if (savedSize && !isNaN(parseInt(savedSize))) {
             let size = parseInt(savedSize);
-            if (size >= MIN_SIZE && size <= MAX_SIZE) {
-                setRootFontSize(size);
-            } else {
-                setRootFontSize(16);
-            }
+            if (size >= MIN_SIZE && size <= MAX_SIZE) setFontSize(size);
+            else setFontSize(16);
         } else {
-            setRootFontSize(16);
+            setFontSize(16);
         }
 
-        // ---------- Тёмная / светлая тема ----------
-        const body = document.body;
-        const themeToggleBtn = document.getElementById('themeToggle');
+        document.getElementById('increaseFont')?.addEventListener('click', () => {
+            let newSize = Math.min(currentFontSize + 1, MAX_SIZE);
+            setFontSize(newSize);
+        });
+        document.getElementById('decreaseFont')?.addEventListener('click', () => {
+            let newSize = Math.max(currentFontSize - 1, MIN_SIZE);
+            setFontSize(newSize);
+        });
 
+        const themeBtn = document.getElementById('themeToggle');
+        const body = document.body;
         function setTheme(theme) {
             if (theme === 'dark') {
                 body.classList.add('dark');
@@ -366,46 +327,15 @@
                 localStorage.setItem('ruqya_theme', 'light');
             }
         }
-
-        function toggleTheme() {
-            if (body.classList.contains('dark')) {
-                setTheme('light');
-            } else {
-                setTheme('dark');
-            }
-        }
-
         const savedTheme = localStorage.getItem('ruqya_theme');
-        if (savedTheme === 'dark') {
-            setTheme('dark');
-        } else if (savedTheme === 'light') {
-            setTheme('light');
-        } else {
-            // определить системные предпочтения
+        if (savedTheme === 'dark') setTheme('dark');
+        else if (savedTheme === 'light') setTheme('light');
+        else {
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (prefersDark) setTheme('dark');
-            else setTheme('light');
+            setTheme(prefersDark ? 'dark' : 'light');
         }
-
-        // ---------- Привязка кнопок ----------
-        const incBtn = document.getElementById('increaseFont');
-        const decBtn = document.getElementById('decreaseFont');
-        if (incBtn) incBtn.addEventListener('click', increaseFont);
-        if (decBtn) decBtn.addEventListener('click', decreaseFont);
-        if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
-
-        // Для сенсорной обратной связи (доп. комфорт)
-        const allBtns = document.querySelectorAll('.tool-btn');
-        allBtns.forEach(btn => {
-            btn.addEventListener('touchstart', function(e) {
-                this.style.transform = 'scale(0.96)';
-            }, {passive: true});
-            btn.addEventListener('touchend', function(e) {
-                this.style.transform = '';
-            });
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = '';
-            });
+        themeBtn?.addEventListener('click', () => {
+            body.classList.contains('dark') ? setTheme('light') : setTheme('dark');
         });
     })();
 </script>
